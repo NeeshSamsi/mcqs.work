@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons"
 import { ModeToggle } from "./ModeToggle"
+import { Button } from "./ui/button"
 
 export default function Navbar() {
   return (
@@ -10,7 +11,15 @@ export default function Navbar() {
         <span>MCQ Practice</span>
       </Link>
 
-      <ModeToggle />
+      <div className="flex items-center gap-4">
+        <Button asChild>
+          <Link href="/new" className="text-lg">
+            New
+          </Link>
+        </Button>
+
+        <ModeToggle />
+      </div>
     </nav>
   )
 }
