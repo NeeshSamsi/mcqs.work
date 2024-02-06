@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import { Inter } from "next/font/google"
+import { Inter as FontSans } from "next/font/google"
 import Wrapper from "@/components/Wrapper"
+import { cn } from "@/lib/utils"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
   title: "NEET MCQ Practice",
@@ -17,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`{inter.variable} font-inter`}>
+      <body
+        className={cn("bg-background font-sans antialiased", fontSans.variable)}
+      >
         <Wrapper>{children}</Wrapper>
       </body>
     </html>
