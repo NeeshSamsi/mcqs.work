@@ -1,11 +1,9 @@
-import Image from "next/image"
+// This page is not accessible - Redirects to /new - Check next.config.mjs
 
 export default function Home() {
   return (
-    <main className="py-12">
-      <h1 className=" text-4xl font-semibold text-center">NEET MCQ Practice</h1>
-
-      <form></form>
+    <main>
+      <h1 className="my-12 text-center text-5xl font-semibold">MCQ Practice</h1>
     </main>
   )
 }
