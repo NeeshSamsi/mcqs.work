@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import { url } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { Inter as FontSans } from "next/font/google"
 
@@ -9,9 +10,29 @@ import Navbar from "@/components/Navbar"
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
 
+const siteName = "MCQ Practice"
+const title = "MCQ Practice"
+const description =
+  "Practice your MCQs, add your answer key, get a calculated score & review your answers."
+
 export const metadata: Metadata = {
-  title: "MCQ Practice",
-  description: "",
+  metadataBase: new URL(url),
+  title: {
+    default: title,
+    template: `%s | ${siteName}`,
+  },
+  description,
+  openGraph: {
+    title,
+    description,
+    siteName,
+    type: "website",
+  },
+  twitter: {
+    title,
+    description,
+    card: "summary",
+  },
 }
 
 export default function RootLayout({
