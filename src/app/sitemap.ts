@@ -1,16 +1,17 @@
 import { MetadataRoute } from "next"
+import { url } from "@/lib/config"
 
 const sitemap: MetadataRoute.Sitemap = [
   {
-    url: "/",
+    url: `${url}/`,
     lastModified: new Date(),
   },
   {
-    url: "/new",
+    url: "${url}/new",
     lastModified: new Date(),
   },
   {
-    url: "/session",
+    url: "${url}/session",
     lastModified: new Date(),
   },
 ]
