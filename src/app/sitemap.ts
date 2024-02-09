@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next"
 
-export default [
+const sitemap: MetadataRoute.Sitemap = [
   {
     url: "/",
     lastModified: new Date(),
@@ -13,4 +13,6 @@ export default [
     url: "/session",
     lastModified: new Date(),
   },
-] satisfies MetadataRoute.Sitemap
+]
+
+export default sitemap
