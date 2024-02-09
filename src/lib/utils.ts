@@ -19,3 +19,19 @@ export function numericEnum<TValues extends readonly number[]>(
     }
   }) as ZodType<TValues[number]>
 }
+
+export function getScore(
+  type: "NEET",
+  { correct, wrong, empty }: { correct: number; wrong: number; empty: number },
+): number {
+  switch (type) {
+    case "NEET":
+      return correct * 4 - wrong
+
+    // case "default":
+    //   return correct - wrong
+
+    default:
+      return 0
+  }
+}
