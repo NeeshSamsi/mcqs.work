@@ -1,10 +1,12 @@
-import { MetadataRoute } from "next"
+import { type MetadataRoute } from "next"
+import { url } from "@/lib/config"
 
-const robots: MetadataRoute.Robots = {
-  rules: {
-    userAgent: "*",
-    allow: "/",
-  },
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+    },
+    sitemap: `${url}/sitemap.xml`,
+  }
 }
-
-export default robots
