@@ -1,2 +1,4 @@
 export const url =
-  process.env.NODE_ENV === "production" ? "https://" : "http://localhost:3000"
+  process.env.NODE_ENV === "production"
+    ? "https://mcqswork.vercel.app"
+    : "http://localhost:3000"
