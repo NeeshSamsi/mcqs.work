@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "./ui/select"
 import { Button } from "./ui/button"
+import Link from "next/link"
 
 type Options = 0 | 1 | 2 | 3
 
@@ -39,8 +40,15 @@ const options = {
   "A-D": ["A", "B", "C", "D"],
 }
 
-export default function SessionForm(settings: z.infer<typeof settingsSchema>) {
+function handleReset() {
+  if (typeof window !== "undefined" && window.localStorage) {
+    localStorage.clear()
+  }
+}
+
+export default function SessionForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const steps: Steps = [
     {
@@ -56,21 +64,31 @@ export default function SessionForm(settings: z.infer<typeof settingsSchema>) {
       title: "Review Results",
     },
   ]
-  const [currentStep, setCurrentStep] = useState<Options | null>(3)
+
+  const [currentStep, setCurrentStep] = useState<0 | 1 | 2 | 3 | null>(1)
+  const [settings, setSettings] = useState<z.infer<
+    typeof settingsSchema
+  > | null>(null)
 
   useEffect(() => {
-    const validate = settingsSchema.safeParse(settings)
-    if (validate.success) {
-      if (!currentStep) {
-        setCurrentStep(1)
-      }
-    } else {
+    const validate = settingsSchema.safeParse({
+      minQuestions: searchParams.get("minQuestions"),
+      maxQuestions: searchParams.get("maxQuestions"),
+      optionsType: searchParams.get("optionsType"),
+    })
+
+    if (!validate.success) {
       setCurrentStep(0)
       setTimeout(() => {
         router.push("/new")
       }, 2000)
+    } else {
+      setSettings(validate.data)
+      if (!currentStep) {
+        setCurrentStep(1)
+      }
     }
-  }, [settings, router, currentStep])
+  }, [searchParams, router, currentStep])
 
   return (
     <>
@@ -80,7 +98,7 @@ export default function SessionForm(settings: z.infer<typeof settingsSchema>) {
           : "Practice Session"}
       </h1>
 
-      {currentStep && (
+      {!!currentStep && (
         <header className="my-12 grid grid-cols-3 gap-12">
           {steps.map(({ id, title }) => (
             <Step
@@ -95,25 +113,39 @@ export default function SessionForm(settings: z.infer<typeof settingsSchema>) {
       )}
 
       <main>
-        {currentStep === 0 && (
-          <p className="text-2xl font-light">Redirecting to settings page...</p>
+        {currentStep === 0 ? (
+          <p className="text-3xl">Redirecting to settings page...</p>
+        ) : (
+          currentStep &&
+          !settings && <p className="text-2xl font-light">Loading form ...</p>
         )}
 
-        {currentStep === 1 && (
-          <MCQForm
-            formType="questionAnswers"
-            {...settings}
-            setCurrentStep={setCurrentStep}
-          />
+        {settings && (
+          <>
+            {currentStep === 1 && (
+              <MCQForm
+                formType="questionAnswers"
+                {...settings}
+                setCurrentStep={setCurrentStep}
+              />
+            )}
+            {currentStep === 2 && (
+              <MCQForm
+                formType="answerKey"
+                {...settings}
+                setCurrentStep={setCurrentStep}
+              />
+            )}
+            {currentStep === 3 && (
+              <div className="space-y-8">
+                <Results optionsType={settings.optionsType} />
+                <Link href="/new " className="block" onClick={handleReset}>
+                  <Button>Reset</Button>
+                </Link>
+              </div>
+            )}
+          </>
         )}
-        {currentStep === 2 && (
-          <MCQForm
-            formType="answerKey"
-            {...settings}
-            setCurrentStep={setCurrentStep}
-          />
-        )}
-        {currentStep === 3 && <Results optionsType={settings.optionsType} />}
       </main>
     </>
   )
@@ -159,11 +191,11 @@ const MCQForm = ({
     .array()
     .length(numberOfQuestions)
 
-  const defaultState: z.infer<typeof questionsSchema> = Array(
+  const defaultAnswers: z.infer<typeof questionsSchema> = Array(
     numberOfQuestions,
   ).map((_) => undefined)
   const [answers, setAnswers] =
-    useState<z.infer<typeof questionsSchema>>(defaultState)
+    useState<z.infer<typeof questionsSchema>>(defaultAnswers)
 
   const handleChange = (index: number, value: string) => {
     const option = options[optionsType].findIndex((el) => el === value)
@@ -178,13 +210,15 @@ const MCQForm = ({
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    localStorage.setItem(formType, JSON.stringify(answers))
+    if (typeof window !== "undefined" && window.localStorage) {
+      localStorage.setItem(formType, JSON.stringify(answers))
+    } else {
+      throw new Error("Unable to access Local Storage")
+    }
 
     if (formType === "questionAnswers") {
-      console.log("Step 2")
       setCurrentStep(2)
     } else {
-      console.log("Step 3")
       setCurrentStep(3)
     }
   }
@@ -226,8 +260,20 @@ const MCQForm = ({
 }
 
 const Results = ({ optionsType }: { optionsType: TypeOfOptions }) => {
-  const localQuestionAnswers = localStorage.getItem("questionAnswers")
-  const localAnswerKey = localStorage.getItem("answerKey")
+  const [localQuestionAnswers, setLocalQuestionAnswers] = useState<
+    string | null
+  >(null)
+  const [localAnswerKey, setLocalAnswerKey] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      const questionAnswers = localStorage.getItem("questionAnswers")
+      const answerKey = localStorage.getItem("answerKey")
+
+      setLocalQuestionAnswers(questionAnswers)
+      setLocalAnswerKey(answerKey)
+    }
+  }, [])
 
   if (!localQuestionAnswers || !localAnswerKey) {
     return (
@@ -246,7 +292,10 @@ const Results = ({ optionsType }: { optionsType: TypeOfOptions }) => {
   if (questionAnswers.length !== answerKey.length) {
     return (
       <div>
-        <p>Something went wrong: Length of question answers & answer key.</p>
+        <p>
+          Something went wrong: Length of question answers & answer key do not
+          match.
+        </p>
       </div>
     )
   }
@@ -337,7 +386,11 @@ const ReviewQuestion = ({
       <div className="grid grid-cols-3 ">
         <p className="flex items-center justify-center gap-2">
           <span className="w-[4ch]">Q{index + 1}:</span>
-          <span className="w-fit">{options[optionsType][submittedAnswer]}</span>
+          <span className="w-fit">
+            {options[optionsType][submittedAnswer]
+              ? options[optionsType][submittedAnswer]
+              : "N/A"}
+          </span>
         </p>
         <p className="flex items-center justify-center gap-2">
           <span className="w-[4ch]">A{index + 1}:</span>
@@ -345,7 +398,9 @@ const ReviewQuestion = ({
         </p>
         <p>
           {result === "correct" && "✅"}
-          {result === "wrong" && "✖️"}
+          {result === "wrong" && "❌"}
+          {result === "empty" && "—"}
+          {/* ✖️ */}
         </p>
       </div>
     </div>

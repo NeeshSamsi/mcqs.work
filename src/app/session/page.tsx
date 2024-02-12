@@ -1,6 +1,5 @@
 import { type Metadata } from "next"
-import { z } from "zod"
-import { settingsSchema } from "@/lib/zodSchemas"
+import { Suspense } from "react"
 import SessionForm from "@/components/SessionForm"
 
 const title = "Practice Session"
@@ -16,11 +15,10 @@ export const metadata: Metadata = {
   },
 }
 
-type PageProps = {
-  params: {}
-  searchParams: z.infer<typeof settingsSchema>
-}
-
-export default function Session(props: PageProps) {
-  return <SessionForm {...props.searchParams} />
+export default function Session() {
+  return (
+    <Suspense fallback={<p className="text-3xl">Error loading form</p>}>
+      <SessionForm />
+    </Suspense>
+  )
 }
