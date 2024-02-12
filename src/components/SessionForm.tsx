@@ -308,7 +308,7 @@ const Results = ({ optionsType }: { optionsType: TypeOfOptions }) => {
     const keyAnswer = answerKey[i]
     let result: "correct" | "wrong" | "empty"
 
-    if (answer === null) {
+    if (answer === null || answer === 0) {
       result = "empty"
     } else {
       if (answer === keyAnswer) {
