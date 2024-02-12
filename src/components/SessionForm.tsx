@@ -15,7 +15,7 @@ import {
 import { Button } from "./ui/button"
 import Link from "next/link"
 
-type Options = 0 | 1 | 2 | 3
+type Options = 0 | 1 | 2 | 3 | 4
 
 type Steps = {
   id: 1 | 2 | 3
@@ -26,7 +26,7 @@ type FormType = "questionAnswers" | "answerKey"
 
 interface MCQFormProps extends z.infer<typeof settingsSchema> {
   formType: FormType
-  setCurrentStep: Dispatch<SetStateAction<Options | null>>
+  setCurrentStep: Dispatch<SetStateAction<0 | 1 | 2 | 3 | null>>
 }
 
 interface ResultType {
@@ -36,8 +36,8 @@ interface ResultType {
 }
 
 const options = {
-  "1-4": ["1", "2", "3", "4"],
-  "A-D": ["A", "B", "C", "D"],
+  "1-4": ["Empty", "1", "2", "3", "4"],
+  "A-D": ["Empty", "A", "B", "C", "D"],
 }
 
 function handleReset() {
@@ -225,6 +225,9 @@ const MCQForm = ({
 
   return (
     <form onSubmit={(event) => handleSubmit(event)} className="space-y-8">
+      <pre>
+        <code>{JSON.stringify(answers, null, 2)}</code>
+      </pre>
       <div className="space-y-4">
         {[...Array(numberOfQuestions)].map((_, i) => {
           const number = Number(minQuestions) + Number(i)
@@ -240,6 +243,9 @@ const MCQForm = ({
                 </SelectTrigger>
 
                 <SelectContent>
+                  {/* <SelectItem key={i} value="">
+                    Empty
+                  </SelectItem> */}
                   {options[optionsType].map((option, i) => (
                     <SelectItem key={i} value={options[optionsType][i]}>
                       {option}
