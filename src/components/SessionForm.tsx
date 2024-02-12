@@ -225,9 +225,6 @@ const MCQForm = ({
 
   return (
     <form onSubmit={(event) => handleSubmit(event)} className="space-y-8">
-      <pre>
-        <code>{JSON.stringify(answers, null, 2)}</code>
-      </pre>
       <div className="space-y-4">
         {[...Array(numberOfQuestions)].map((_, i) => {
           const number = Number(minQuestions) + Number(i)
