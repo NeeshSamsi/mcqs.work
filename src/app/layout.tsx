@@ -4,7 +4,6 @@ import { url } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { Inter as FontSans } from "next/font/google"
 
-import { ThemeProvider } from "@/components/ThemeProvider"
 import Wrapper from "@/components/Wrapper"
 import Navbar from "@/components/Navbar"
 
@@ -43,19 +42,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn("bg-background font-sans antialiased", fontSans.variable)}
+        className={cn(
+          "dark bg-background font-sans antialiased",
+          fontSans.variable,
+        )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Wrapper>
-            <Navbar />
-            {children}
-          </Wrapper>
-        </ThemeProvider>
+        <Wrapper>
+          <Navbar />
+          {children}
+        </Wrapper>
       </body>
     </html>
   )
