@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 import { cn, getScore, numericEnum } from "@/lib/utils"
-import { settingsSchema, type TypeOfOptions } from "@/lib/zodSchemas"
+import { ScoringType, settingsSchema, type OptionsType } from "@/lib/zodSchemas"
 import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import {
@@ -72,6 +72,7 @@ export default function SessionForm() {
 
   useEffect(() => {
     const validate = settingsSchema.safeParse({
+      scoringType: searchParams.get("scoringType"),
       minQuestions: searchParams.get("minQuestions"),
       maxQuestions: searchParams.get("maxQuestions"),
       optionsType: searchParams.get("optionsType"),
@@ -138,7 +139,10 @@ export default function SessionForm() {
             )}
             {currentStep === 3 && (
               <div className="space-y-8">
-                <Results optionsType={settings.optionsType} />
+                <Results
+                  scoringType={settings.scoringType}
+                  optionsType={settings.optionsType}
+                />
                 <Link href="/new " className="block" onClick={handleReset}>
                   <Button>Reset</Button>
                 </Link>
@@ -262,7 +266,13 @@ const MCQForm = ({
   )
 }
 
-const Results = ({ optionsType }: { optionsType: TypeOfOptions }) => {
+const Results = ({
+  scoringType,
+  optionsType,
+}: {
+  scoringType: ScoringType
+  optionsType: OptionsType
+}) => {
   const [localQuestionAnswers, setLocalQuestionAnswers] = useState<
     string | null
   >(null)
@@ -335,7 +345,7 @@ const Results = ({ optionsType }: { optionsType: TypeOfOptions }) => {
         <div className="mb-16 grid grid-cols-4 gap-6">
           <Stat
             title="Score"
-            stat={getScore("NEET", { correct, wrong, empty })}
+            stat={getScore(scoringType, { correct, wrong, empty })}
           />
           <Stat title="Correct Answers" stat={correct} />
           <Stat title="Wrong Answers" stat={wrong} />
@@ -370,7 +380,7 @@ const Stat = ({ title, stat }: { title: string; stat: number }) => {
 
 interface ReviewQuestionType extends ResultType {
   index: number
-  optionsType: TypeOfOptions
+  optionsType: OptionsType
 }
 const ReviewQuestion = ({
   submittedAnswer,

@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { z, type ZodType } from "zod"
+import { ScoringType } from "./zodSchemas"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -21,10 +22,13 @@ export function numericEnum<TValues extends readonly number[]>(
 }
 
 export function getScore(
-  type: "NEET",
+  type: ScoringType,
   { correct, wrong, empty }: { correct: number; wrong: number; empty: number },
 ): number {
   switch (type) {
+    case "Normal":
+      return correct
+
     case "NEET":
       return correct * 4 - wrong
 

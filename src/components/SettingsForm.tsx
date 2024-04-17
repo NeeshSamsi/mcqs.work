@@ -24,11 +24,14 @@ import {
   SelectValue,
 } from "./ui/select"
 import { Button } from "./ui/button"
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
+import { scoringTypes } from "@/lib/config"
 
 export default function SettingsForm() {
   const form = useForm<z.infer<typeof settingsSchema>>({
     resolver: zodResolver(settingsSchema),
     defaultValues: {
+      scoringType: "Normal",
       minQuestions: 1,
       maxQuestions: 5,
       optionsType: "A-D",
@@ -56,16 +59,45 @@ export default function SettingsForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="space-y-4">
-          <p className="text-2xl font-medium">Scoring type</p>
-          <Select disabled>
-            <SelectTrigger className="w-[8.5ch] text-lg">
-              <SelectValue placeholder="NEET" className="p-2" />
-            </SelectTrigger>
-          </Select>
+          <FormField
+            control={form.control}
+            name="scoringType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-2xl font-medium">
+                  Scoring Type
+                </FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-fit gap-2 text-lg">
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {scoringTypes.map(({ name }) => (
+                      <SelectItem className="text-base" value={name}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormDescription className="text-base">
+                  {
+                    scoringTypes.find(({ name }) => name === field.value)
+                      ?.message
+                  }
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
 
         <div className="space-y-4">
-          <p className="text-2xl font-medium">Range of Questions</p>
+          <p className="text-2xl font-medium">Range of questions</p>
           <div className="flex gap-6">
             <FormField
               control={form.control}
@@ -114,6 +146,39 @@ export default function SettingsForm() {
           control={form.control}
           name="optionsType"
           render={({ field }) => (
+            <FormItem className="space-y-3">
+              <FormLabel className="mb-4 block text-2xl font-medium">
+                Type of options
+              </FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex items-center gap-8"
+                >
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="A-D" />
+                    </FormControl>
+                    <FormLabel className="text-lg">A - D</FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="1-4" />
+                    </FormControl>
+                    <FormLabel className="text-lg">1 - 4</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* <FormField
+          control={form.control}
+          name="optionsType"
+          render={({ field }) => (
             <FormItem>
               <FormLabel className="mb-4 block text-2xl font-medium">
                 Type of options
@@ -134,7 +199,7 @@ export default function SettingsForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <Button type="submit" className="text-base">
           Start Session
