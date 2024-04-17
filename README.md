@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MCQ Practice App
 
-## Getting Started
+The all in one app to practice MCQ Questions including support for the marking schemes of common competitive exams.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Custom range for start and end of MCQS**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  Choose how where you want your questions to start so they line up with the Question Bank you may be referring you to.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Pick the type of options**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+  Choose between A-D & 1-4 option types
 
-## Learn More
+- **Custom Scoring Types**
 
-To learn more about Next.js, take a look at the following resources:
+  Choose the way your score is calculated. Normal scoring is just +1 point for correct answers and no negative marking. We also more have complex calculations like +4 for correct & -1 for wrong answers
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Get readymade inputs for the range of questions and options you selected**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Fill in your answers from your answer key**
 
-## Deploy on Vercel
+- **Summary of the Session**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  Get an overview of your correct, wrong & empty questions.C alculated score based on the Scoring Type you selected. Check all the questions you got right, wrong and left empty.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Dev Notes
+
+**To add a new Scoring Type:**
+
+- Add object to `config.ts`
+
+  ```ts
+  {
+    name: "Name",
+    message: "Describe the marking scheme here."
+  }
+  ```
+
+- Update the `lib/zodSchemas.ts` file
+
+  ```ts
+  const scoringType = z.enum(["Normal", "NEET"])
+  ```
+
+- Add your scoring type's calculation function to the `lib/utils.ts` file under the `getScore()` function
+  ```ts
+  case "Name":
+      return correct
+  ```
