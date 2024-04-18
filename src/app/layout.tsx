@@ -7,6 +7,7 @@ import { Inter as FontSans } from "next/font/google"
 import Wrapper from "@/components/Wrapper"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import Script from "next/script"
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -42,6 +43,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script
+        strategy="lazyOnload"
+        src="https://umami.neeshsamsi.com/script.js"
+        data-website-id="4adaf4c4-4b15-4253-8cf1-eee28c36b20b"
+      />
+
       <body
         className={cn(
           "dark bg-background font-sans antialiased",
