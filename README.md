@@ -22,13 +22,14 @@ The all in one app to practice MCQ Questions including support for the marking s
 
 - **Summary of the Session**
 
-  Get an overview of your correct, wrong & empty questions.C alculated score based on the Scoring Type you selected. Check all the questions you got right, wrong and left empty.
+  Get an overview of your correct, wrong & empty questions. Calculated score based on the Scoring Type you selected. Check all the questions you got right, wrong and left empty.
 
 ## Built With
 
-1. Next.js 14
-1. Tailwind CSS
-1. Shadcn UI
+1. Next.js 14 - The react meta framework I'm comfortable with.
+1. Tailwind CSS - The best way I know how to CSS.
+1. Shadcn UI - The only reason I can deal with forms.
+1. HyperUI.dev - Some of the most convenient Tailwind CSS Components - Completely Free & Opensource.
 
 ## Dev Notes
 
