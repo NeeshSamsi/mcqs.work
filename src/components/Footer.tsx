@@ -49,6 +49,8 @@ export default function Footer() {
           Made with ❤️ by{" "}
           <Link
             href="https://neeshsamsi.com"
+            rel="noreferrer"
+            target="_blank"
             className="underline transition hover:opacity-75"
           >
             Neesh
