@@ -24,6 +24,12 @@ The all in one app to practice MCQ Questions including support for the marking s
 
   Get an overview of your correct, wrong & empty questions.C alculated score based on the Scoring Type you selected. Check all the questions you got right, wrong and left empty.
 
+## Built With
+
+1. Next.js 14
+1. Tailwind CSS
+1. Shadcn UI
+
 ## Dev Notes
 
 **To add a new Scoring Type:**
