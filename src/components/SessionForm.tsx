@@ -142,6 +142,7 @@ export default function SessionForm() {
                 <Results
                   scoringType={settings.scoringType}
                   optionsType={settings.optionsType}
+                  minQuestions={settings.minQuestions}
                 />
                 <Link href="/new " className="block" onClick={handleReset}>
                   <Button>Reset</Button>
@@ -269,9 +270,11 @@ const MCQForm = ({
 const Results = ({
   scoringType,
   optionsType,
+  minQuestions,
 }: {
   scoringType: ScoringType
   optionsType: OptionsType
+  minQuestions: number
 }) => {
   const [localQuestionAnswers, setLocalQuestionAnswers] = useState<
     string | null
@@ -361,6 +364,7 @@ const Results = ({
               {...result}
               index={i}
               optionsType={optionsType}
+              minQuestions={minQuestions}
             />
           ))}
         </div>
@@ -380,6 +384,7 @@ const Stat = ({ title, stat }: { title: string; stat: number }) => {
 
 interface ReviewQuestionType extends ResultType {
   index: number
+  minQuestions: number
   optionsType: OptionsType
 }
 const ReviewQuestion = ({
@@ -387,6 +392,7 @@ const ReviewQuestion = ({
   keyAnswer,
   result,
   index,
+  minQuestions,
   optionsType,
 }: ReviewQuestionType) => {
   return (
@@ -398,7 +404,7 @@ const ReviewQuestion = ({
     >
       <div className="grid grid-cols-3 ">
         <p className="flex items-center justify-center gap-2">
-          <span className="w-[4ch]">Q{index + 1}:</span>
+          <span className="w-[4ch]">Q{minQuestions + index}:</span>
           <span className="w-fit">
             {options[optionsType][submittedAnswer]
               ? options[optionsType][submittedAnswer]
@@ -406,7 +412,7 @@ const ReviewQuestion = ({
           </span>
         </p>
         <p className="flex items-center justify-center gap-2">
-          <span className="w-[4ch]">A{index + 1}:</span>
+          <span className="w-[4ch]">A{minQuestions + index}:</span>
           <span className="w-fit">{options[optionsType][keyAnswer]}</span>
         </p>
         <p>
