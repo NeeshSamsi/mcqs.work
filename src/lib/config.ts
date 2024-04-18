@@ -1,6 +1,6 @@
 export const url =
   process.env.NODE_ENV === "production"
-    ? "https://mcqswork.vercel.app"
+    ? "https://mcqs.work"
     : "http://localhost:3000"
 
 export const scoringTypes = [
