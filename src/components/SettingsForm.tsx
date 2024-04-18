@@ -98,13 +98,13 @@ export default function SettingsForm() {
 
         <div className="space-y-4">
           <p className="text-2xl font-medium">Range of questions</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
             <FormField
               control={form.control}
               name="minQuestions"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-4">
                     <FormLabel className="w-fit text-xl font-light">
                       From Q no.:
                     </FormLabel>
@@ -124,7 +124,7 @@ export default function SettingsForm() {
               name="maxQuestions"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-4">
                     <FormLabel className="w-fit text-xl font-light">
                       To Q no.:
                     </FormLabel>
