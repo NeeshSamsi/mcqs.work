@@ -25,7 +25,7 @@ export default function Footer() {
             <GitHubLogoIcon className="size-6" />
           </Link>
 
-          <nav className="flex gap-4">
+          <nav className="flex flex-col gap-4 text-end md:flex-row md:text-start">
             <Link
               href="/"
               className="text-slate-400 transition hover:opacity-75"
