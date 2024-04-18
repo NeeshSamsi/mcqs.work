@@ -1,5 +1,12 @@
 import Link from "next/link"
-import { MoveRight } from "lucide-react"
+import {
+  Calculator,
+  List,
+  ListOrdered,
+  ListTodo,
+  MoveRight,
+  Sliders,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import FeatureCard from "@/components/FeatureCard"
 import TestimonialCard from "@/components/TestimonialCard"
@@ -10,29 +17,30 @@ export default function Home() {
       <main className=" lg:flex lg:items-center">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-balance bg-gradient-to-br from-blue-600 via-blue-800 to-blue-400 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl">
-            Understand User Flow. Increase Conversion.
+            Ace Your Exams with mcqs.work
           </h1>
 
-          <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-            illo tenetur fuga ducimus numquam ea!
+          <p className="mx-auto mt-4 max-w-xl text-balance sm:text-xl/relaxed">
+            Your personal toolkit for mastering multiple-choice questions.
+            Tailor your practice, track your progress, and triumph in your
+            tests.
           </p>
 
           <Button
             asChild
             className="mx-auto mt-8 block w-full text-lg font-semibold sm:w-fit"
           >
-            <Link href="/new">Get Started</Link>
+            <Link href="/new">Start Your Session Now</Link>
           </Button>
         </div>
       </main>
 
       <section>
-        <div className="max-w-[60ch]">
+        <div>
           <h2 className="text-3xl font-semibold sm:text-4xl">
-            Kickstart your marketing
+            Features to Boost Your MCQ Practice
           </h2>
-          <p className="mt-4 text-slate-300">
+          <p className="mt-4 max-w-[60ch] text-slate-300">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             Consequuntur aliquam doloribus nesciunt eos fugiat. Vitae aperiam
             fugit consequuntur saepe laborum.
@@ -41,28 +49,29 @@ export default function Home() {
 
         <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <FeatureCard
-            title="Digital campaigns"
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium."
+            icon={<Sliders className="size-7" />}
+            title="Customizable Range"
+            description="Choosing your start and end points for your MCQ sessions. Align them with your preferred question bank."
           />
           <FeatureCard
-            title="Digital campaigns"
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium."
+            icon={<ListOrdered className="size-7" />}
+            title="Choose Option Types"
+            description="Select your preferred option format: A-D or 1-4. Practice with the layout you’re most comfortable with."
           />
           <FeatureCard
-            title="Digital campaigns"
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium."
+            icon={<Calculator className="size-7" />}
+            title="Flexible Scoring Types"
+            description="Opt for traditional +1 for correct answers, or explore complex calculations for Competitive Exams like NEET or JEE."
           />
           <FeatureCard
-            title="Digital campaigns"
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium."
+            icon={<List className="size-7" />}
+            title="Ready-to-Use Inputs"
+            description="Get pre-filled questions based on your selected range and options. Fill in your answers using your answer key."
           />
           <FeatureCard
-            title="Digital campaigns"
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium."
-          />
-          <FeatureCard
-            title="Digital campaigns"
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium."
+            icon={<ListTodo className="size-7" />}
+            title="Session Summary"
+            description="Review your performance. See correct, wrong, and unanswered questions. Get a pre calculated score based on your chosen scoring type."
           />
         </div>
       </section>
@@ -107,7 +116,7 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col items-center gap-4 rounded-lg bg-primary p-6 text-background shadow-lg sm:flex-row sm:justify-between">
-        <strong className="text-xl">Make Your Next Career Move!</strong>
+        <strong className="text-xl">Ace Your Exams with mcqs.work!</strong>
 
         <Button
           variant="secondary"
@@ -115,7 +124,7 @@ export default function Home() {
           className="flex items-center gap-2 text-lg"
         >
           <Link href="/new">
-            <span>Something</span>
+            <span>Start Session</span>
             <MoveRight strokeWidth={2} />
           </Link>
         </Button>

@@ -3,16 +3,16 @@ import { GitHubLogoIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons"
 
 export default function Footer() {
   return (
-    <footer className="mt-8 py-8 text-lg">
+    <footer className="mt-8 py-8 text-base sm:text-lg">
       <div className="flex justify-between gap-8">
         <div className="space-y-4">
           <Link href="/" className="flex items-center gap-2 text-xl">
             <QuestionMarkCircledIcon className="size-7" />
             <strong className="font-semibold">mcqs.work</strong>
           </Link>
-          <p className="max-w-[40ch] text-balance text-slate-400">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non
-            cupiditate quae nam molestias.
+          <p className="max-w-[50ch] text-slate-400">
+            The all in one app to practice MCQ Questions including support for
+            the marking schemes of common competitive exams.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-8 flex items-center justify-between text-base text-slate-400">
+      <div className="mt-8 flex items-center justify-between text-sm text-slate-400 sm:text-base">
         <p>Copyright &copy; {new Date().getFullYear()}. All rights reserved.</p>
 
         <p>

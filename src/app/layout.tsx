@@ -11,10 +11,11 @@ import Script from "next/script"
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" })
 
-const siteName = "MCQ Practice"
-const title = "MCQ Practice"
+const siteName = "MCQS.work"
+const title = "MCQS.work | Customizable MCQ Practice Sessions"
 const description =
-  "Practice your MCQs, add your answer key, get a calculated score & review your answers."
+  // "Customizable MCQ Practice to Boost Exam Prep. Master MCQs & Ace your Exams!"
+  "Ace your exams with mcqs.work! Customize your MCQ practice sessions, choose option types, and track your progress. Get ready-to-use inputs and a session summary. Start practicing now!"
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),
