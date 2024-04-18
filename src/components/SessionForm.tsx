@@ -100,7 +100,7 @@ export default function SessionForm() {
       </h1>
 
       {!!currentStep && (
-        <header className="my-12 grid grid-cols-3 gap-12">
+        <header className="my-12 grid grid-cols-3 gap-6 md:gap-12">
           {steps.map(({ id, title }) => (
             <Step
               key={id}
@@ -177,7 +177,7 @@ const Step = ({
       <p className={cn("mb-2 text-lg", { "text-primary": accent })}>
         Step {step}
       </p>
-      <p className="text-2xl font-semibold">{title}</p>
+      <p className="text-xl font-semibold md:text-2xl">{title}</p>
     </div>
   )
 }
@@ -345,7 +345,7 @@ const Results = ({
     <>
       <div className="rounded-xl bg-secondary p-10">
         <h2 className="mb-8 text-4xl font-semibold">Overview</h2>
-        <div className="mb-16 grid grid-cols-4 gap-6">
+        <div className="mb-16 grid grid-cols-2 gap-6 md:grid-cols-4">
           <Stat
             title="Score"
             stat={getScore(scoringType, { correct, wrong, empty })}
