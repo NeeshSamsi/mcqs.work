@@ -14,7 +14,7 @@ import TestimonialCard from "@/components/TestimonialCard"
 export default function Home() {
   return (
     <div className="grid gap-24">
-      <main className=" lg:flex lg:items-center">
+      <main className="lg:flex lg:items-center">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-balance bg-gradient-to-br from-blue-600 via-blue-800 to-blue-400 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl">
             Ace Your Exams with mcqs.work
