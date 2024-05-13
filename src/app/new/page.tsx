@@ -1,6 +1,7 @@
 import { type Metadata } from "next"
 import { Suspense } from "react"
 import SettingsForm from "@/components/SettingsForm"
+import Wrapper from "@/components/Wrapper"
 
 const title = "New Session"
 const description =
