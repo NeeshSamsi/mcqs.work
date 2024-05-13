@@ -10,7 +10,7 @@ export default function Wrapper({
 }) {
   return (
     <div
-      className={cn("mx-auto w-[min(1024px,100%-2rem)] font-sans", className)}
+      className={cn("mx-auto w-[min(1024px,100%-4rem)] font-sans", className)}
     >
       {children}
     </div>
