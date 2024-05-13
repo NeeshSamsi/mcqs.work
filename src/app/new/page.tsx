@@ -1,4 +1,5 @@
 import { type Metadata } from "next"
+import { Suspense } from "react"
 import SettingsForm from "@/components/SettingsForm"
 
 const title = "New Session"
@@ -19,7 +20,9 @@ export default function New() {
     <main>
       <h1 className="my-12 text-5xl font-semibold">Configure Settings</h1>
 
-      <SettingsForm />
+      <Suspense fallback={<p className="text-3xl">Loading form...</p>}>
+        <SettingsForm />
+      </Suspense>
     </main>
   )
 }

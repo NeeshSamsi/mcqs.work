@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function Session() {
   return (
-    <Suspense fallback={<p className="text-3xl">Error loading form</p>}>
+    <Suspense fallback={<p className="text-3xl">Loading form...</p>}>
       <SessionForm />
     </Suspense>
   )
