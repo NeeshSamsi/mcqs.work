@@ -17,12 +17,14 @@ export const metadata: Metadata = {
 
 export default function New() {
   return (
-    <main>
-      <h1 className="my-12 text-5xl font-semibold">Configure Settings</h1>
+    <Wrapper>
+      <main>
+        <h1 className="my-12 text-5xl font-semibold">Configure Settings</h1>
 
-      <Suspense fallback={<p className="text-3xl">Loading form...</p>}>
-        <SettingsForm />
-      </Suspense>
-    </main>
+        <Suspense fallback={<p className="text-3xl">Loading form...</p>}>
+          <SettingsForm />
+        </Suspense>
+      </main>
+    </Wrapper>
   )
 }

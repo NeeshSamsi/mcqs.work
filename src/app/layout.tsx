@@ -4,7 +4,6 @@ import { url } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { Inter as FontSans } from "next/font/google"
 
-import Wrapper from "@/components/Wrapper"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import Script from "next/script"
@@ -57,11 +56,9 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Wrapper>
-          <Navbar />
-          {children}
-          <Footer />
-        </Wrapper>
+        <Navbar />
+        {children}
+        <Footer />
       </body>
     </html>
   )

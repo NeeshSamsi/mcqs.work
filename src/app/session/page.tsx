@@ -1,6 +1,7 @@
 import { type Metadata } from "next"
 import { Suspense } from "react"
 import SessionForm from "@/components/SessionForm"
+import Wrapper from "@/components/Wrapper"
 
 const title = "Practice Session"
 const description =
@@ -17,8 +18,10 @@ export const metadata: Metadata = {
 
 export default function Session() {
   return (
-    <Suspense fallback={<p className="text-3xl">Loading form...</p>}>
-      <SessionForm />
-    </Suspense>
+    <Wrapper>
+      <Suspense fallback={<p className="text-3xl">Loading form...</p>}>
+        <SessionForm />
+      </Suspense>
+    </Wrapper>
   )
 }
