@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons"
 import { Button } from "./ui/button"
-
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import Wrapper from "./Wrapper"
 
 export default function Navbar() {
@@ -24,11 +24,20 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center gap-4">
-            <Button asChild>
-              <Link href="/new" className="text-lg font-semibold">
-                New Session
-              </Link>
-            </Button>
+            <SignedIn>
+              <Button asChild>
+                <Link href="/new" className="text-lg font-semibold">
+                  New Session
+                </Link>
+              </Button>
+
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton>
+                <Button>Sign In</Button>
+              </SignInButton>
+            </SignedOut>
           </div>
         </nav>
       </Wrapper>
