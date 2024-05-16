@@ -15,5 +15,17 @@
 - [ ] Refactor `/session` page
   -  `/session/[sessionId]` - Fetch settings from db - Session form
   -  Saves answers & answer keys - Fetch data from db to create Overview
-- [ ] Retrieve from db to create overview
 - [ ] Page to show past sessions & progress over time
+
+Potential Site Structure
+```
+/ Landing Page
+├─ session
+│  └─ new - Settings form
+│  └─ [sessionId] Session form
+│  │  └─ answers
+│  │  └─ answer-key
+│  │  └─ results
+├─ [username] Overview
+└─ 
+```
