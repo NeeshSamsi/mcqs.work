@@ -20,12 +20,12 @@
 Potential Site Structure
 ```
 / Landing Page
-├─ session
-│  └─ new - Settings form
-│  └─ [sessionId] Session form
-│  │  └─ answers
-│  │  └─ answer-key
-│  │  └─ results
-├─ [username] Overview
+├─ /session
+│  └─ /new - Settings form
+│  └─ /[sessionId] Session form
+│  │  └─ /answers
+│  │  └─ /answer-key
+│  │  └─ /results
+├─ /[username] Overview
 └─ 
 ```
