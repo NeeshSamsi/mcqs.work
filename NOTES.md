@@ -8,16 +8,18 @@
 ## Save Sessions to Database
 
 - [ ] Refactor `/new` page
-  -  `/new` - Public route, so you can setup your session - Login to submit
-  -  `/new` - Settings form, save live to url params - Submit button checks Auth
-    - If not, login to start session - redirect to login (callback url will retain url params so you don't lose progress)
-    - If auth, Create session in db - Redirect to `/session/[sessionId]`
+  - `/new` - Public route, so you can setup your session - Login to submit
+  - `/new` - Settings form, save live to url params - Submit button checks Auth
+  - If not, login to start session - redirect to login (callback url will retain url params so you don't lose progress)
+  - If auth, Create session in db - Redirect to `/[sessionId]`
 - [ ] Refactor `/session` page
-  -  `/session/[sessionId]` - Fetch settings from db - Session form
-  -  Saves answers & answer keys - Fetch data from db to create Overview
+  - `/[sessionId]` - Fetch settings from db - Session form
+  - Saves answers & answer keys - Fetch data from db to create Overview
 - [ ] Page to show past sessions & progress over time
+  - `/overview`
 
 Potential Site Structure
+
 ```
 / - Landing Page
 ├─ /new - Settings form
@@ -25,6 +27,6 @@ Potential Site Structure
 │  └─ /answers
 │  └─ /answer-key
 │  └─ /results
-├─ /overview - Progess over time, Past sessions  
-└─ 
+├─ /overview - Progess over time, Past sessions
+└─
 ```
