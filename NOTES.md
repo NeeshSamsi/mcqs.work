@@ -19,13 +19,12 @@
 
 Potential Site Structure
 ```
-/ Landing Page
-├─ /session
-│  └─ /new - Settings form
-│  └─ /[sessionId] Session form
-│  │  └─ /answers
-│  │  └─ /answer-key
-│  │  └─ /results
-├─ /[username] Overview
+/ - Landing Page
+├─ /new - Settings form
+├─ /[sessionId] - Session form
+│  └─ /answers
+│  └─ /answer-key
+│  └─ /results
+├─ /overview - Progess over time, Past sessions  
 └─ 
 ```
