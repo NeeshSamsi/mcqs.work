@@ -1,11 +1,19 @@
-# Dev Notes
+# Notes
 
-## Add Authentication
+## Tech Stack
+
+- [Next.js](https://nextjs.org) - Website
+- [Clerk](https://clerk.com) - Authentication
+- [Turso DB](https://turso.tech) - Database
+
+## TODO
+
+### Add Authentication
 
 - [x] Add Clerk authentication
 - [x] Protect new & session routes
 
-## Save Sessions to Database
+### Save Sessions to Database
 
 - [ ] Refactor `/new` page
   - `/new` - Public route, so you can setup your session - Login to submit
