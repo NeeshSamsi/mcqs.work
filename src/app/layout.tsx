@@ -59,11 +59,13 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <Script
-          strategy="lazyOnload"
-          src="https://umami.neeshsamsi.com/script.js"
-          data-website-id="4adaf4c4-4b15-4253-8cf1-eee28c36b20b"
-        />
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            strategy="lazyOnload"
+            src="https://umami.neeshsamsi.com/script.js"
+            data-website-id="4adaf4c4-4b15-4253-8cf1-eee28c36b20b"
+          />
+        )}
 
         <body
           className={cn(
