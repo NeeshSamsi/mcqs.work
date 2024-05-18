@@ -58,7 +58,7 @@ const Step = ({
 }: {
   step: number
   title: string
-  accent?: boolean
+  accent: boolean
 }) => {
   return (
     <div>
