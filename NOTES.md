@@ -24,11 +24,11 @@
 Session Table
 
 - sessionId | unique id (slug)
-- scoringType | string
 - minQuestion | number
 - maxQuestion | number
-- optionsType | string
--
+- scoringType | string ("Normal" | "NEET" | "JEE")
+- optionsType | string ("1-4" | "A-D")
+- state | string ("questions" | "answer-key" | "complete")
 
 ## TODO
 
