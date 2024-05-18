@@ -32,7 +32,7 @@ Potential Site Structure
 / - Landing Page
 ├─ /new - Settings form
 ├─ /[sessionId] - Session form
-│  └─ /answers
+│  └─ /questions
 │  └─ /answer-key
 │  └─ /results
 ├─ /overview - Progess over time, Past sessions
