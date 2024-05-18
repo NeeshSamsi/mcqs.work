@@ -6,6 +6,30 @@
 - [Clerk](https://clerk.com) - Authentication
 - [Turso DB](https://turso.tech) - Database
 
+## Sitemap
+
+```
+/ - Landing Page
+├─ /new - Settings form
+├─ /[sessionId] - Session form
+│  └─ /questions
+│  └─ /answer-key
+│  └─ /results
+├─ /overview - Progess over time, Past sessions
+└─
+```
+
+## DB Schema
+
+Session Table
+
+- sessionId | unique id (slug)
+- scoringType | string
+- minQuestion | number
+- maxQuestion | number
+- optionsType | string
+-
+
 ## TODO
 
 ### Add Authentication
@@ -25,16 +49,3 @@
   - Saves answers & answer keys - Fetch data from db to create Overview
 - [ ] Page to show past sessions & progress over time
   - `/overview`
-
-Potential Site Structure
-
-```
-/ - Landing Page
-├─ /new - Settings form
-├─ /[sessionId] - Session form
-│  └─ /questions
-│  └─ /answer-key
-│  └─ /results
-├─ /overview - Progess over time, Past sessions
-└─
-```
