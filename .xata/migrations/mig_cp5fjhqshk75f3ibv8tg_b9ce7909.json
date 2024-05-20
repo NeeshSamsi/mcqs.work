@@ -1,0 +1,18 @@
+{
+  "id": "mig_cp5fjhqshk75f3ibv8tg",
+  "parentID": "mig_cp5fjaashk75f3ibv8sg",
+  "checksum": "1:b9ce7909895c0fae2d29d108d2899eb81b1c708692a57aa174e4943a1a0be1aa",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "scoringType",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "Normal"
+        },
+        "table": "Sessions"
+      }
+    }
+  ]
+}

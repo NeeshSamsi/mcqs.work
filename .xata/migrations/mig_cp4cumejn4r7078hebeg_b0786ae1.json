@@ -1,0 +1,11 @@
+{
+  "id": "mig_cp4cumejn4r7078hebeg",
+  "checksum": "1:b0786ae1f542b9d053f354b0063e56f2edc55d0d3dc1b2b41b82a46b4fcb2054",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Sessions"
+      }
+    }
+  ]
+}

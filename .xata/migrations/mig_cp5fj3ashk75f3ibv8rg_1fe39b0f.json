@@ -1,0 +1,18 @@
+{
+  "id": "mig_cp5fj3ashk75f3ibv8rg",
+  "parentID": "mig_cp4cumejn4r7078hebeg",
+  "checksum": "1:1fe39b0f023139d700c11d5ad88813e601d335b80efcb6cdfdbf879f387e976a",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "minQuestion",
+          "type": "int",
+          "notNull": true,
+          "defaultValue": "1"
+        },
+        "table": "Sessions"
+      }
+    }
+  ]
+}

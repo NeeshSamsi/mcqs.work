@@ -1,0 +1,18 @@
+{
+  "id": "mig_cp5fjaashk75f3ibv8sg",
+  "parentID": "mig_cp5fj3ashk75f3ibv8rg",
+  "checksum": "1:8c7de253fe57c6a2d9a1031df475b414a686a34dd19e7965800916b4444e0c88",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "maxQuestion",
+          "type": "int",
+          "notNull": true,
+          "defaultValue": "5"
+        },
+        "table": "Sessions"
+      }
+    }
+  ]
+}

@@ -24,6 +24,7 @@
 Session Table
 
 - sessionId | unique id (slug)
+- userId | string (clerk user id)
 - minQuestion | number
 - maxQuestion | number
 - scoringType | string ("Normal" | "NEET" | "JEE")

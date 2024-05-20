@@ -1,0 +1,18 @@
+{
+  "id": "mig_cp5fju2shk75f3ibv930",
+  "parentID": "mig_cp5fjp2shk75f3ibv920",
+  "checksum": "1:a59996ffebe8215b005f79592265c9da219168428e80fc8cee3e94ef30bc7414",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "complete",
+          "type": "bool",
+          "notNull": true,
+          "defaultValue": "false"
+        },
+        "table": "Sessions"
+      }
+    }
+  ]
+}
