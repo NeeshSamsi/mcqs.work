@@ -73,8 +73,8 @@ export default function SessionForm() {
   useEffect(() => {
     const validate = settingsSchema.safeParse({
       scoringType: searchParams.get("scoringType"),
-      minQuestions: searchParams.get("minQuestions"),
-      maxQuestions: searchParams.get("maxQuestions"),
+      minQuestion: searchParams.get("minQuestion"),
+      maxQuestion: searchParams.get("maxQuestion"),
       optionsType: searchParams.get("optionsType"),
     })
 
@@ -142,7 +142,7 @@ export default function SessionForm() {
                 <Results
                   scoringType={settings.scoringType}
                   optionsType={settings.optionsType}
-                  minQuestions={settings.minQuestions}
+                  minQuestion={settings.minQuestion}
                 />
                 <Link href="/new " className="block" onClick={handleReset}>
                   <Button>Reset</Button>
@@ -183,13 +183,13 @@ const Step = ({
 }
 
 const MCQForm = ({
-  minQuestions,
-  maxQuestions,
+  minQuestion,
+  maxQuestion,
   optionsType,
   formType,
   setCurrentStep,
 }: MCQFormProps) => {
-  const numberOfQuestions = maxQuestions - minQuestions + 1
+  const numberOfQuestions = maxQuestion - minQuestion + 1
   const Options = [0, 1, 2, 3] as const
   const questionsSchema = numericEnum(Options)
     .optional()
@@ -232,7 +232,7 @@ const MCQForm = ({
     <form onSubmit={(event) => handleSubmit(event)} className="space-y-8">
       <div className="space-y-4">
         {[...Array(numberOfQuestions)].map((_, i) => {
-          const number = Number(minQuestions) + Number(i)
+          const number = Number(minQuestion) + Number(i)
           const label = `${formType === "questionAnswers" ? "Q" : "A"}${number}:`
 
           return (
@@ -270,11 +270,11 @@ const MCQForm = ({
 const Results = ({
   scoringType,
   optionsType,
-  minQuestions,
+  minQuestion,
 }: {
   scoringType: ScoringType
   optionsType: OptionsType
-  minQuestions: number
+  minQuestion: number
 }) => {
   const [localQuestionAnswers, setLocalQuestionAnswers] = useState<
     string | null
@@ -364,7 +364,7 @@ const Results = ({
               {...result}
               index={i}
               optionsType={optionsType}
-              minQuestions={minQuestions}
+              minQuestion={minQuestion}
             />
           ))}
         </div>
@@ -384,7 +384,7 @@ const Stat = ({ title, stat }: { title: string; stat: number }) => {
 
 interface ReviewQuestionType extends ResultType {
   index: number
-  minQuestions: number
+  minQuestion: number
   optionsType: OptionsType
 }
 const ReviewQuestion = ({
@@ -392,7 +392,7 @@ const ReviewQuestion = ({
   keyAnswer,
   result,
   index,
-  minQuestions,
+  minQuestion,
   optionsType,
 }: ReviewQuestionType) => {
   return (
@@ -404,7 +404,7 @@ const ReviewQuestion = ({
     >
       <div className="grid grid-cols-3 ">
         <p className="flex items-center justify-center gap-2">
-          <span className="w-[4ch]">Q{minQuestions + index}:</span>
+          <span className="w-[4ch]">Q{minQuestion + index}:</span>
           <span className="w-fit">
             {options[optionsType][submittedAnswer]
               ? options[optionsType][submittedAnswer]
@@ -412,7 +412,7 @@ const ReviewQuestion = ({
           </span>
         </p>
         <p className="flex items-center justify-center gap-2">
-          <span className="w-[4ch]">A{minQuestions + index}:</span>
+          <span className="w-[4ch]">A{minQuestion + index}:</span>
           <span className="w-fit">{options[optionsType][keyAnswer]}</span>
         </p>
         <p>

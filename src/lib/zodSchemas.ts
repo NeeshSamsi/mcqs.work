@@ -9,13 +9,13 @@ export type ScoringType = z.infer<typeof scoringType>
 export const settingsSchema = z
   .object({
     scoringType,
-    minQuestions: z.coerce.number(),
-    maxQuestions: z.coerce.number({
+    minQuestion: z.coerce.number(),
+    maxQuestion: z.coerce.number({
       invalid_type_error: "Testing number validation",
     }),
     optionsType,
   })
-  .refine(({ minQuestions, maxQuestions }) => maxQuestions > minQuestions, {
+  .refine(({ minQuestion, maxQuestion }) => maxQuestion > minQuestion, {
     message: "Ending question should be greater than starting question",
-    path: ["maxQuestions"],
+    path: ["maxQuestion"],
   })

@@ -26,33 +26,30 @@ import {
 import { Button } from "./ui/button"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
 import { scoringTypes } from "@/lib/config"
+import { createSession } from "@/actions"
+import { useAuth } from "@clerk/nextjs"
 
 export default function SettingsForm() {
   const form = useForm<z.infer<typeof settingsSchema>>({
     resolver: zodResolver(settingsSchema),
     defaultValues: {
       scoringType: "Normal",
-      minQuestions: 1,
-      maxQuestions: 5,
+      minQuestion: 1,
+      maxQuestion: 5,
       optionsType: "A-D",
     },
   })
 
   const router = useRouter()
 
-  function onSubmit(settings: z.infer<typeof settingsSchema>) {
-    let searchParamsArray = []
+  async function onSubmit(settings: z.infer<typeof settingsSchema>) {
+    const { userId } = useAuth()
 
-    for (const key in settings) {
-      searchParamsArray.push([
-        key,
-        String(settings[key as keyof typeof settings]),
-      ])
-    }
+    if (!userId) return
 
-    const searchParamsString = new URLSearchParams(searchParamsArray).toString()
+    const session = await createSession({ userId, ...settings })
 
-    router.push(`/session?${searchParamsString}`)
+    router.push(`/something/questions`)
   }
 
   return (
@@ -101,7 +98,7 @@ export default function SettingsForm() {
           <div className="flex flex-wrap gap-6">
             <FormField
               control={form.control}
-              name="minQuestions"
+              name="minQuestion"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex flex-wrap items-center gap-4">
@@ -121,7 +118,7 @@ export default function SettingsForm() {
             />
             <FormField
               control={form.control}
-              name="maxQuestions"
+              name="maxQuestion"
               render={({ field }) => (
                 <FormItem>
                   <div className="flex flex-wrap items-center gap-4">
