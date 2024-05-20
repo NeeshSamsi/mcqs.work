@@ -28,7 +28,7 @@ Session Table
 - maxQuestion | number
 - scoringType | string ("Normal" | "NEET" | "JEE")
 - optionsType | string ("1-4" | "A-D")
-- state | string ("questions" | "answer-key" | "complete")
+- complete | boolean
 
 ## TODO
 
