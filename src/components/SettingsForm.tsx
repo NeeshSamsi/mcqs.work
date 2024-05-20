@@ -3,8 +3,8 @@
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { settingsSchema } from "@/lib/zodSchemas"
-import { useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
+import { scoringTypes } from "@/lib/config"
+import { createSession } from "@/actions"
 
 import {
   Form,
@@ -25,9 +25,12 @@ import {
 } from "./ui/select"
 import { Button } from "./ui/button"
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group"
-import { scoringTypes } from "@/lib/config"
-import { createSession } from "@/actions"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
 import { useAuth } from "@clerk/nextjs"
+import { useToast } from "./ui/use-toast"
 
 export default function SettingsForm() {
   const form = useForm<z.infer<typeof settingsSchema>>({
@@ -41,15 +44,34 @@ export default function SettingsForm() {
   })
 
   const router = useRouter()
+  const { userId } = useAuth()
+  const { toast } = useToast()
+
+  const [loading, setLoading] = useState(false)
 
   async function onSubmit(settings: z.infer<typeof settingsSchema>) {
-    const { userId } = useAuth()
-
+    // On a protected page, should always have a user id
     if (!userId) return
 
-    const session = await createSession({ userId, ...settings })
+    setLoading(true)
 
-    router.push(`/something/questions`)
+    const { success, session } = await createSession({
+      userId,
+      ...settings,
+    })
+
+    if (success) {
+      setLoading(false)
+      router.push(`/${session?.id}/questions`)
+    } else {
+      setLoading(false)
+      toast({
+        variant: "destructive",
+        title: "Something went wrong.",
+        description:
+          "Please try again later. If this persists, please reach out.",
+      })
+    }
   }
 
   return (
@@ -172,34 +194,12 @@ export default function SettingsForm() {
           )}
         />
 
-        {/* <FormField
-          control={form.control}
-          name="optionsType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="mb-4 block text-2xl font-medium">
-                Type of options
-              </FormLabel>
-
-              <Select onValueChange={field.onChange}>
-                <FormControl>
-                  <SelectTrigger className="w-fit text-base">
-                    <SelectValue placeholder="Choose type of options" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="1-4">1 - 4</SelectItem>
-                  <SelectItem value="A-D">A - D</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <FormMessage />
-            </FormItem>
+        <Button type="submit" disabled={loading} className="text-base">
+          {loading ? (
+            <span>Creating Session...</span>
+          ) : (
+            <span>Start Session</span>
           )}
-        /> */}
-
-        <Button type="submit" className="text-base">
-          Start Session
         </Button>
       </form>
     </Form>
