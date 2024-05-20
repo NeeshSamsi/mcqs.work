@@ -25,6 +25,7 @@ const tables = [
         defaultValue: "A-D",
       },
       { name: "complete", type: "bool", notNull: true, defaultValue: "false" },
+      { name: "userId", type: "string" },
     ],
   },
 ] as const;
